@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  go-app:
+    container_name: go-app
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    networks:
+      - go-app-network
+    command: tail -f /dev/null
+    volumes:
+      - ./.:/go/src/app
+
+networks:
+  go-app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.56.0/24
