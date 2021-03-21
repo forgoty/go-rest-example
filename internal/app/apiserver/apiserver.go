@@ -4,15 +4,18 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/sirupsen/logrus"
 	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
+
+	"github.com/forgoty/go-rest-example/internal/app/store"
 )
 
 // APIServer
-type APIServer struct{
+type APIServer struct {
 	config *Config
 	logger *logrus.Logger
 	router *mux.Router
+	store  *store.Store
 }
 
 // New APIServer
@@ -27,6 +30,10 @@ func New(config *Config) *APIServer {
 // Start APIServer
 func (s *APIServer) Start() error {
 	if err := s.configureLogger(); err != nil {
+		return err
+	}
+
+	if err := s.configureStore(); err != nil {
 		return err
 	}
 
@@ -49,8 +56,17 @@ func (s *APIServer) configureRouter() {
 	s.router.HandleFunc("/hello", s.handleHello())
 }
 
+func (s *APIServer) configureStore() error {
+	st := store.New(s.config.Store)
+	if err := st.Open(); err != nil {
+		return err
+	}
+	s.store = st
+	return nil
+}
+
 func (s *APIServer) handleHello() http.HandlerFunc {
-	return func (w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, "Hello")
 	}
 }

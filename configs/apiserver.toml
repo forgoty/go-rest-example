@@ -1,2 +1,5 @@
 bind_addr = ":8000"
 log_level = "debug"
+
+[store]
+database_url = "host=pg dbname=example user=example password=example sslmode=disable"
