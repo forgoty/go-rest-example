@@ -1,8 +1,8 @@
 package store_test
 
 import (
-	"testing"
 	"os"
+	"testing"
 )
 
 var (

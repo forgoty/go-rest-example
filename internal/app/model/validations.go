@@ -12,4 +12,3 @@ func requiredIf(condition bool) validation.RuleFunc {
 		return nil
 	}
 }
-

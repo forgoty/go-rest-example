@@ -1,10 +1,10 @@
 package store
 
 // Configuration of store database
-type Config struct{
+type Config struct {
 	DatabaseURL string `toml:"database_url"`
 }
 
-func NewConfig() *Config{
+func NewConfig() *Config {
 	return &Config{}
 }

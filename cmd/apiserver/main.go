@@ -1,8 +1,8 @@
 package main
 
 import (
-	"log"
 	"flag"
+	"log"
 
 	"github.com/BurntSushi/toml"
 
@@ -16,7 +16,6 @@ var (
 func init() {
 	flag.StringVar(&configPath, "config-path", "configs/apiserver.toml", "path to config file")
 }
-
 
 func main() {
 	flag.Parse()
