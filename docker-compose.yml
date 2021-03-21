@@ -13,6 +13,16 @@ services:
     volumes:
       - ./.:/go/src/app
 
+  pg:
+    image: postgres:12-alpine
+    container_name: pg
+    environment:
+      - POSTGRES_USER=example
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=example
+    networks:
+      - go-app-network
+
 networks:
   go-app-network:
     driver: bridge
